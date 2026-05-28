@@ -1,4 +1,5 @@
 import {Command, Flags} from '@oclif/core'
+import Table from 'cli-table3'
 import {BSON} from 'mongodb'
 import prompts from 'prompts'
 
@@ -103,24 +104,33 @@ export default class ProfilerList extends Command {
       }
 
       this.log(`共 ${entries.length} 条记录（按 ts 降序）：`)
-      for (const entry of entries) {
-        this.log(flags.full ? EJSON.stringify(entry) : formatBrief(entry))
+      if (flags.full) {
+        for (const entry of entries) {
+          this.log(EJSON.stringify(entry))
+        }
+      } else {
+        const table = new Table({
+          head: ['timestamp', 'op', 'ns', 'millis', 'planSummary', 'nreturned', 'examined'],
+          style: {head: ['cyan']},
+        })
+        for (const entry of entries) {
+          const ts = entry.ts ? new Date(entry.ts).toISOString() : '-'
+          table.push([
+            ts,
+            entry.op ?? '-',
+            entry.ns ?? '-',
+            entry.millis === undefined ? '-' : `${entry.millis}ms`,
+            entry.planSummary ?? '-',
+            entry.nreturned ?? '-',
+            entry.docsExamined ?? '-',
+          ])
+        }
+
+        this.log(table.toString())
       }
       // #endregion
     } finally {
       await client.close()
     }
   }
-}
-
-function formatBrief(entry: ProfileEntry): string {
-  // 关键字段：ts | op | ns | millis | planSummary | nreturned/docsExamined
-  const ts = entry.ts ? new Date(entry.ts).toISOString() : '-'
-  const op = entry.op ?? '-'
-  const ns = entry.ns ?? '-'
-  const millis = entry.millis === undefined ? '-' : `${entry.millis}ms`
-  const plan = entry.planSummary ?? '-'
-  const nreturned = entry.nreturned ?? '-'
-  const examined = entry.docsExamined ?? '-'
-  return `${ts} | ${op} | ${ns} | ${millis} | ${plan} | nreturned=${nreturned} examined=${examined}`
 }
