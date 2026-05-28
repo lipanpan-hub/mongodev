@@ -13,7 +13,9 @@
     "@oclif/plugin-help": "^6",
     "@oclif/plugin-not-found": "^3.2.86",
     "@oclif/plugin-version": "^2.2.46",
-    "@oclif/plugin-warn-if-update-available": "^3.1.65"
+    "@oclif/plugin-warn-if-update-available": "^3.1.65",
+    "mongodb": "^7.2.0",
+    "prompts": "^2.4.2"
   },
   "devDependencies": {
     "@eslint/compat": "^1",
@@ -22,6 +24,7 @@
     "@types/chai": "^4",
     "@types/mocha": "^10",
     "@types/node": "^18",
+    "@types/prompts": "^2.4.9",
     "chai": "^4",
     "eslint": "^9",
     "eslint-config-oclif": "^6",
