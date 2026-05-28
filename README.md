@@ -20,7 +20,7 @@ $ npm install -g @lppx/mongodev
 $ mgd COMMAND
 running command...
 $ mgd (--version)
-@lppx/mongodev/0.0.0 win32-x64 node-v24.14.1
+@lppx/mongodev/0.0.0 linux-x64 node-v22.22.3
 $ mgd --help [COMMAND]
 USAGE
   $ mgd COMMAND
@@ -29,61 +29,40 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`mgd hello PERSON`](#mgd-hello-person)
-* [`mgd hello world`](#mgd-hello-world)
+* [`mgd autocomplete [SHELL]`](#mgd-autocomplete-shell)
 * [`mgd help [COMMAND]`](#mgd-help-command)
-* [`mgd plugins`](#mgd-plugins)
-* [`mgd plugins add PLUGIN`](#mgd-plugins-add-plugin)
-* [`mgd plugins:inspect PLUGIN...`](#mgd-pluginsinspect-plugin)
-* [`mgd plugins install PLUGIN`](#mgd-plugins-install-plugin)
-* [`mgd plugins link PATH`](#mgd-plugins-link-path)
-* [`mgd plugins remove [PLUGIN]`](#mgd-plugins-remove-plugin)
-* [`mgd plugins reset`](#mgd-plugins-reset)
-* [`mgd plugins uninstall [PLUGIN]`](#mgd-plugins-uninstall-plugin)
-* [`mgd plugins unlink [PLUGIN]`](#mgd-plugins-unlink-plugin)
-* [`mgd plugins update`](#mgd-plugins-update)
+* [`mgd version`](#mgd-version)
 
-## `mgd hello PERSON`
+## `mgd autocomplete [SHELL]`
 
-Say hello
+Display autocomplete installation instructions.
 
 ```
 USAGE
-  $ mgd hello PERSON -f <value>
+  $ mgd autocomplete [SHELL] [-r]
 
 ARGUMENTS
-  PERSON  Person to say hello to
+  [SHELL]  (zsh|bash|powershell) Shell type
 
 FLAGS
-  -f, --from=<value>  (required) Who is saying hello
+  -r, --refresh-cache  Refresh cache (ignores displaying instructions)
 
 DESCRIPTION
-  Say hello
+  Display autocomplete installation instructions.
 
 EXAMPLES
-  $ mgd hello friend --from oclif
-  hello friend from oclif! (./src/commands/hello/index.ts)
+  $ mgd autocomplete
+
+  $ mgd autocomplete bash
+
+  $ mgd autocomplete zsh
+
+  $ mgd autocomplete powershell
+
+  $ mgd autocomplete --refresh-cache
 ```
 
-_See code: [src/commands/hello/index.ts](https://github.com/lipanpan-hub/mongodev/blob/v0.0.0/src/commands/hello/index.ts)_
-
-## `mgd hello world`
-
-Say hello world
-
-```
-USAGE
-  $ mgd hello world
-
-DESCRIPTION
-  Say hello world
-
-EXAMPLES
-  $ mgd hello world
-  hello world! (./src/commands/hello/world.ts)
-```
-
-_See code: [src/commands/hello/world.ts](https://github.com/lipanpan-hub/mongodev/blob/v0.0.0/src/commands/hello/world.ts)_
+_See code: [@oclif/plugin-autocomplete](https://github.com/oclif/plugin-autocomplete/blob/v3.2.50/src/commands/autocomplete/index.ts)_
 
 ## `mgd help [COMMAND]`
 
@@ -105,293 +84,23 @@ DESCRIPTION
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/6.2.49/src/commands/help.ts)_
 
-## `mgd plugins`
-
-List installed plugins.
+## `mgd version`
 
 ```
 USAGE
-  $ mgd plugins [--json] [--core]
+  $ mgd version [--json] [--verbose]
 
 FLAGS
-  --core  Show core plugins.
+  --verbose  Show additional information about the CLI.
 
 GLOBAL FLAGS
   --json  Format output as json.
 
-DESCRIPTION
-  List installed plugins.
+FLAG DESCRIPTIONS
+  --verbose  Show additional information about the CLI.
 
-EXAMPLES
-  $ mgd plugins
+    Additionally shows the architecture, node version, operating system, and versions of plugins that the CLI is using.
 ```
 
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/5.4.69/src/commands/plugins/index.ts)_
-
-## `mgd plugins add PLUGIN`
-
-Installs a plugin into mgd.
-
-```
-USAGE
-  $ mgd plugins add PLUGIN... [--json] [-f] [-h] [-s | -v]
-
-ARGUMENTS
-  PLUGIN...  Plugin to install.
-
-FLAGS
-  -f, --force    Force npm to fetch remote resources even if a local copy exists on disk.
-  -h, --help     Show CLI help.
-  -s, --silent   Silences npm output.
-  -v, --verbose  Show verbose npm output.
-
-GLOBAL FLAGS
-  --json  Format output as json.
-
-DESCRIPTION
-  Installs a plugin into mgd.
-
-  Uses npm to install plugins.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  Use the MGD_NPM_LOG_LEVEL environment variable to set the npm loglevel.
-  Use the MGD_NPM_REGISTRY environment variable to set the npm registry.
-
-ALIASES
-  $ mgd plugins add
-
-EXAMPLES
-  Install a plugin from npm registry.
-
-    $ mgd plugins add myplugin
-
-  Install a plugin from a github url.
-
-    $ mgd plugins add https://github.com/someuser/someplugin
-
-  Install a plugin from a github slug.
-
-    $ mgd plugins add someuser/someplugin
-```
-
-## `mgd plugins:inspect PLUGIN...`
-
-Displays installation properties of a plugin.
-
-```
-USAGE
-  $ mgd plugins inspect PLUGIN...
-
-ARGUMENTS
-  PLUGIN...  [default: .] Plugin to inspect.
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-GLOBAL FLAGS
-  --json  Format output as json.
-
-DESCRIPTION
-  Displays installation properties of a plugin.
-
-EXAMPLES
-  $ mgd plugins inspect myplugin
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/5.4.69/src/commands/plugins/inspect.ts)_
-
-## `mgd plugins install PLUGIN`
-
-Installs a plugin into mgd.
-
-```
-USAGE
-  $ mgd plugins install PLUGIN... [--json] [-f] [-h] [-s | -v]
-
-ARGUMENTS
-  PLUGIN...  Plugin to install.
-
-FLAGS
-  -f, --force    Force npm to fetch remote resources even if a local copy exists on disk.
-  -h, --help     Show CLI help.
-  -s, --silent   Silences npm output.
-  -v, --verbose  Show verbose npm output.
-
-GLOBAL FLAGS
-  --json  Format output as json.
-
-DESCRIPTION
-  Installs a plugin into mgd.
-
-  Uses npm to install plugins.
-
-  Installation of a user-installed plugin will override a core plugin.
-
-  Use the MGD_NPM_LOG_LEVEL environment variable to set the npm loglevel.
-  Use the MGD_NPM_REGISTRY environment variable to set the npm registry.
-
-ALIASES
-  $ mgd plugins add
-
-EXAMPLES
-  Install a plugin from npm registry.
-
-    $ mgd plugins install myplugin
-
-  Install a plugin from a github url.
-
-    $ mgd plugins install https://github.com/someuser/someplugin
-
-  Install a plugin from a github slug.
-
-    $ mgd plugins install someuser/someplugin
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/5.4.69/src/commands/plugins/install.ts)_
-
-## `mgd plugins link PATH`
-
-Links a plugin into the CLI for development.
-
-```
-USAGE
-  $ mgd plugins link PATH [-h] [--install] [-v]
-
-ARGUMENTS
-  PATH  [default: .] path to plugin
-
-FLAGS
-  -h, --help          Show CLI help.
-  -v, --verbose
-      --[no-]install  Install dependencies after linking the plugin.
-
-DESCRIPTION
-  Links a plugin into the CLI for development.
-
-  Installation of a linked plugin will override a user-installed or core plugin.
-
-  e.g. If you have a user-installed or core plugin that has a 'hello' command, installing a linked plugin with a 'hello'
-  command will override the user-installed or core plugin implementation. This is useful for development work.
-
-
-EXAMPLES
-  $ mgd plugins link myplugin
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/5.4.69/src/commands/plugins/link.ts)_
-
-## `mgd plugins remove [PLUGIN]`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ mgd plugins remove [PLUGIN...] [-h] [-v]
-
-ARGUMENTS
-  [PLUGIN...]  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ mgd plugins unlink
-  $ mgd plugins remove
-
-EXAMPLES
-  $ mgd plugins remove myplugin
-```
-
-## `mgd plugins reset`
-
-Remove all user-installed and linked plugins.
-
-```
-USAGE
-  $ mgd plugins reset [--hard] [--reinstall]
-
-FLAGS
-  --hard       Delete node_modules and package manager related files in addition to uninstalling plugins.
-  --reinstall  Reinstall all plugins after uninstalling.
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/5.4.69/src/commands/plugins/reset.ts)_
-
-## `mgd plugins uninstall [PLUGIN]`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ mgd plugins uninstall [PLUGIN...] [-h] [-v]
-
-ARGUMENTS
-  [PLUGIN...]  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ mgd plugins unlink
-  $ mgd plugins remove
-
-EXAMPLES
-  $ mgd plugins uninstall myplugin
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/5.4.69/src/commands/plugins/uninstall.ts)_
-
-## `mgd plugins unlink [PLUGIN]`
-
-Removes a plugin from the CLI.
-
-```
-USAGE
-  $ mgd plugins unlink [PLUGIN...] [-h] [-v]
-
-ARGUMENTS
-  [PLUGIN...]  plugin to uninstall
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Removes a plugin from the CLI.
-
-ALIASES
-  $ mgd plugins unlink
-  $ mgd plugins remove
-
-EXAMPLES
-  $ mgd plugins unlink myplugin
-```
-
-## `mgd plugins update`
-
-Update installed plugins.
-
-```
-USAGE
-  $ mgd plugins update [-h] [-v]
-
-FLAGS
-  -h, --help     Show CLI help.
-  -v, --verbose
-
-DESCRIPTION
-  Update installed plugins.
-```
-
-_See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/5.4.69/src/commands/plugins/update.ts)_
+_See code: [@oclif/plugin-version](https://github.com/oclif/plugin-version/blob/2.2.46/src/commands/version.ts)_
 <!-- commandsstop -->
