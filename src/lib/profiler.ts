@@ -73,3 +73,24 @@ export async function getProfilingStatus(db: Db): Promise<ProfilingStatus> {
   const r = await db.command({profile: -1})
   return {sampleRate: r.sampleRate, slowms: r.slowms, was: r.was}
 }
+
+export interface ProfileEntry {
+  [key: string]: unknown
+  docsExamined?: number
+  keysExamined?: number
+  millis?: number
+  nreturned?: number
+  ns?: string
+  op?: string
+  planSummary?: string
+  ts?: Date
+}
+
+export async function queryProfileEntries(
+  db: Db,
+  query: Record<string, unknown>,
+  limit: number,
+): Promise<ProfileEntry[]> {
+  // eslint-disable-next-line unicorn/no-array-callback-reference
+  return db.collection<ProfileEntry>('system.profile').find(query).sort({ts: -1}).limit(limit).toArray()
+}
