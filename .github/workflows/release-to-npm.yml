@@ -1,7 +1,7 @@
 # 工作流名称：发布到 NPM
-name: publish
+name: publish_to_npm
 
-# 触发条件：当 GitHub Release 被发布时自动执行
+# 触发条件：提交代码的时候自动执行
 on:
   push:
     branches: [master]
@@ -29,10 +29,10 @@ jobs:
       # 步骤4：构建项目（编译 TypeScript 代码）
       - run: npm run build
       
-      # 步骤5：临时安装 CLI 到系统（使 ofl 命令可用）
+      # 步骤5：临时安装 CLI 到系统（使命令可用）
       - run: npm link
       
-      # 步骤6：执行打包前的准备工作（生成 oclif manifest 等）
+      # 步骤6：执行打包前的准备工作（生成 manifest 等）
       - run: npm run prepack
       
       # 步骤7：发布到 NPM 仓库（使用 Trusted Publishing，自动生成 provenance）
