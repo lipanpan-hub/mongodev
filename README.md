@@ -20,7 +20,7 @@ $ npm install -g @lppx/mongodev
 $ mgd COMMAND
 running command...
 $ mgd (--version)
-@lppx/mongodev/0.0.0 win32-x64 node-v24.14.1
+@lppx/mongodev/1.0.1 win32-x64 node-v24.14.1
 $ mgd --help [COMMAND]
 USAGE
   $ mgd COMMAND
@@ -115,7 +115,7 @@ EXAMPLES
   $ mgd profiler list -d mydb -f '{"op":"query","millis":{"$gte":100}}'
 ```
 
-_See code: [src/commands/profiler/list.ts](https://github.com/lipanpan-hub/mongodev/blob/v0.0.0/src/commands/profiler/list.ts)_
+_See code: [src/commands/profiler/list.ts](https://github.com/lipanpan-hub/mongodev/blob/v1.0.1/src/commands/profiler/list.ts)_
 
 ## `mgd profiler reset`
 
@@ -140,7 +140,7 @@ EXAMPLES
   $ mgd profiler reset --slowms 50
 ```
 
-_See code: [src/commands/profiler/reset.ts](https://github.com/lipanpan-hub/mongodev/blob/v0.0.0/src/commands/profiler/reset.ts)_
+_See code: [src/commands/profiler/reset.ts](https://github.com/lipanpan-hub/mongodev/blob/v1.0.1/src/commands/profiler/reset.ts)_
 
 ## `mgd profiler show`
 
@@ -165,7 +165,7 @@ EXAMPLES
   $ mgd profiler show -d mydb -u mongodb://localhost:27017
 ```
 
-_See code: [src/commands/profiler/show.ts](https://github.com/lipanpan-hub/mongodev/blob/v0.0.0/src/commands/profiler/show.ts)_
+_See code: [src/commands/profiler/show.ts](https://github.com/lipanpan-hub/mongodev/blob/v1.0.1/src/commands/profiler/show.ts)_
 
 ## `mgd version`
 
