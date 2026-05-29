@@ -91,22 +91,34 @@ jobs:
         if: ${{ steps.version-check.outputs.skipped == 'false' }}
         run: sudo apt-get update && sudo apt-get install -y p7zip-full zlib1g-dev libc6-dev build-essential gcc-mingw-w64-i686 g++-mingw-w64-i686 libz-mingw-w64-dev
 
-      # 步骤10：安装 NSIS
-      - name: Install NSIS
+      # 步骤10：下载并编译 NSIS
+      - name: Download and build NSIS from source
         if: ${{ steps.version-check.outputs.skipped == 'false' }}
-        uses: repolevedavaj/install-nsis@v1.2.0
-        with:
-          nsis-version: '3.11'
+        run: |
+          # 安装 SCons 构建工具
+          sudo apt-get install -y scons
+          # 下载 NSIS 源码包
+          wget -O nsis-3.11-src.tar.bz2 https://sourceforge.net/projects/nsis/files/NSIS%203/3.11/nsis-3.11-src.tar.bz2/download
+          # 解压源码包
+          tar -xjf nsis-3.11-src.tar.bz2
+          cd nsis-3.11-src
+          # 编译 NSIS 编译器
+          sudo scons NSIS_MAX_STRLEN=8192 PREFIX=/usr/local ZLIB_W32=/usr/i686-w64-mingw32 install-compiler
+          # 安装 NSIS
+          sudo scons NSIS_MAX_STRLEN=8192 PREFIX=/usr/local ZLIB_W32=/usr/i686-w64-mingw32 install
+          cd ..
+          # 验证安装
+          makensis -VERSION
 
       # 步骤11：打包 Windows 安装包
       - name: Pack Windows installers
         if: ${{ steps.version-check.outputs.skipped == 'false' }}
         run: npm run pack:win
       
-      # # 步骤12：打包 Debian 安装包
-      # - name: Pack Debian packages
-      #   if: ${{ steps.version-check.outputs.skipped == 'false' }}
-      #   run: npm run pack:deb
+      # 步骤12：打包 Debian 安装包
+      - name: Pack Debian packages
+        if: ${{ steps.version-check.outputs.skipped == 'false' }}
+        run: npm run pack:deb
       
       # 步骤12：生成 Release Notes（从上一个 release 到当前的所有 commit message）
       - name: Generate Release Notes
