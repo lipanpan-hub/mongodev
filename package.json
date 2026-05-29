@@ -1,7 +1,7 @@
 {
   "name": "@lppx/mongodev",
   "description": "a dev tool for mongodb",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "lppx",
   "bin": {
     "mgd": "./bin/run.js"
